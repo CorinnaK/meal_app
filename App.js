@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import { enableScreens } from "react-native-screens";
+import { NavigationContainer } from "@react-navigation/native";
 import MealsNavigator from "./navigation/MealsNavigator";
 
 enableScreens();
@@ -13,8 +14,6 @@ const fetchFonts = () => {
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
 };
-
-//const Stack = createStackNavigator();
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -29,19 +28,7 @@ export default function App() {
     );
   }
 
-  return (
-    <MealsNavigator />
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
-    //     <Stack.Screen
-    //       name="CategoryMealScreen"
-    //       component={CategoryMealScreen}
-    //     />
-    //     <Stack.Screen name="MealDetailScreen" component={MealDetailScreen} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
-  );
+  return <MealsNavigator />;
 }
 
 const styles = StyleSheet.create({
