@@ -32,21 +32,33 @@ const MealsNavigator = () => {
   );
 };
 
-const FavoriteTabNavigator =
+const FavoritesStackNavigator = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Favorites" component={FavoritesScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const TabNavigator =
   Platform.OS === "android"
     ? () => {
         const Tab = createMaterialBottomTabNavigator();
+
         return (
           <NavigationContainer>
             <Tab.Navigator
-              tabBarOptions={{
-                activeColor: Colors.accentColor,
-              }}
+              activeColor={Colors.accentColor}
+              shifting={true}
+              barStyle={{ backgroundColor: Colors.primaryColor }}
             >
               <Tab.Screen
                 name="Meals"
                 component={MealsNavigator}
                 options={{
+                  // Use this option to change the tab Color when selecting this tab
+                  tabBarColor: Colors.primaryColor,
                   tabBarIcon: (tabInfo) => {
                     return (
                       <Ionicons
@@ -60,7 +72,7 @@ const FavoriteTabNavigator =
               />
               <Tab.Screen
                 name="Favorites"
-                component={FavoritesScreen}
+                component={FavoritesStackNavigator}
                 options={{
                   tabBarIcon: (tabInfo) => {
                     return (
@@ -102,9 +114,10 @@ const FavoriteTabNavigator =
                   },
                 }}
               />
+
               <Tab.Screen
                 name="Favorites"
-                component={FavoritesScreen}
+                component={FavoritesStackNavigator}
                 options={{
                   tabBarIcon: (tabInfo) => {
                     return (
@@ -122,4 +135,4 @@ const FavoriteTabNavigator =
         );
       };
 
-export default FavoriteTabNavigator;
+export default TabNavigator;
