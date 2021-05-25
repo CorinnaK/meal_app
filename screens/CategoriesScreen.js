@@ -1,17 +1,23 @@
-import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import CategoryGridTile from "../components/CategoryGridTile";
+import React, { useEffect } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import CategoryGridTile from "../components/CategoryGridTile";
 import { CATEGORIES } from "../data/dummy-data";
+import HeaderButton from "../components/HeaderButton";
+import HamburgerMenuItem from "../components/HamburgerMenuItem";
 
 const CategoriesScreen = (props) => {
+  useEffect(() => {
+    props.navigation.setOptions({
+      headerTitle: "MealCategories",
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <HamburgerMenuItem navigation={props.navigation} />
+        </HeaderButtons>
+      ),
+    });
+  });
   const renderGridItem = (itemData) => {
     return (
       <CategoryGridTile
